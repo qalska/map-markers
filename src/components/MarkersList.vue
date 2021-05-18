@@ -6,16 +6,14 @@
            placeholder="Поиск"
            v-model="search">
     <ul class="markers__list">
-      <li class="markers__item" 
+      <li class="markers__item"
           v-for="marker in markersByName" 
-          :key="marker.id">
-          <button 
-          class="markers__btn">
-            <img class="markers__img" 
-                 src="@/assets/car.svg" 
-                 alt="car">
-            {{ marker.name }}
-          </button>
+          :key="marker.id"
+          :id="marker.name">
+          <img class="markers__img" 
+               src="@/assets/car.svg" 
+               alt="car">
+          {{ marker.name }}
       </li>
     </ul>
   </div>
@@ -23,7 +21,9 @@
 
 <script>
 export default {
-  props: ['markers'],
+  props: {
+    markers: Array,
+  },
   data() {
     return {
       search: '',
@@ -38,13 +38,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  li{
-    list-style-type: none;
-  }
-  ul{
-    margin-left: 0;
-    padding-left: 0;
-  }
   .markers{
     float: right;
     font-family: 'Roboto', sans-serif;
@@ -70,18 +63,15 @@ export default {
       }
     }
     &__list{
+      margin-left: 0;
+      padding-left: 0;
       padding: 20px;
     }
     &__item{
+      list-style-type: none;
       position: relative;
       padding: 5px 0 5px 0px;
       border-bottom: 1px #EDEDED solid;
-    }
-    &__btn{
-      width: 100%;
-      border: none;
-      background-color: white;
-      text-align: left;
     }
   }
 </style>
