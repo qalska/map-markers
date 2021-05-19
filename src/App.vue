@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       markers: markers,
-      isMarkerIsYellow: false,
+      markerIsYellow: false,
     }
   },
   methods: {
@@ -48,17 +48,17 @@ export default {
         .bindPopup(currentValue.name)
         let markerInList = document.querySelector('#' + currentValue.name);
         currentMarker.on('click', (e) => {
-          if (this.isMarkerIsYellow == false) {
+          if (this.markerIsYellow == false) {
             e.target.setIcon(yellowIcon);
             map.setView(e.target.getLatLng(), 10);
             markerInList.style.backgroundColor = "#f8ff91";
-            this.isMarkerIsYellow = true;
+            this.markerIsYellow = true;
           }
           else {
             e.target.setIcon(greenIcon);
             map.setView(e.target.getLatLng(), 4);
             markerInList.style.backgroundColor = "white";
-            this.isMarkerIsYellow = false;
+            this.markerIsYellow = false;
           }
         });
       });
