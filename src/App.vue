@@ -17,7 +17,8 @@ export default {
   },
   data() {
     return {
-      markers: markers
+      markers: markers,
+      isMarkerIsYellow: false,
     }
   },
   methods: {
@@ -43,15 +44,24 @@ export default {
       });
       
       this.markers.forEach( (currentValue) => {
-          let currentMarker = L.marker([currentValue.latitude, currentValue.longitude], {icon: greenIcon}).addTo(map)
-          .bindPopup(currentValue.name)
-          currentMarker.on('click', (e) => {
+        let currentMarker = L.marker([currentValue.latitude, currentValue.longitude], {icon: greenIcon}).addTo(map)
+        .bindPopup(currentValue.name)
+        let markerInList = document.querySelector('#' + currentValue.name);
+        currentMarker.on('click', (e) => {
+          if (this.isMarkerIsYellow == false) {
             e.target.setIcon(yellowIcon);
             map.setView(e.target.getLatLng(), 10);
-            let markerInList = document.querySelector('#' + currentValue.name);
             markerInList.style.backgroundColor = "#f8ff91";
-          });
+            this.isMarkerIsYellow = true;
+          }
+          else {
+            e.target.setIcon(greenIcon);
+            map.setView(e.target.getLatLng(), 4);
+            markerInList.style.backgroundColor = "white";
+            this.isMarkerIsYellow = false;
+          }
         });
+      });
     }
   },
   mounted() {

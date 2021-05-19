@@ -22,7 +22,11 @@
 <script>
 export default {
   props: {
-    markers: Array,
+    markers: {
+      type: Array,
+      required: false,
+      default: [],
+    },
   },
   data() {
     return {
